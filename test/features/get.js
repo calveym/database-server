@@ -4,7 +4,7 @@ var http = require('http');
 var assert = require('assert');
 var Browser = require('zombie');
 
-describe('get animal', function() {
+describe('get', function() {
   before(function() {
     this.server = http.createServer(app).listen(3000);
     this.browser = new Browser({ site: 'http://localhost:3000' });
