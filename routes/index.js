@@ -4,8 +4,6 @@ var router = express.Router();
 var DataManager = require('../models/dataManager');
 var dm = new DataManager();
 var object = require('../bin/www');
-console.log(object);
-
 
 router.get('/get', function(req, res) {
   dm.returnObject(function (obj) {

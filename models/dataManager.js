@@ -8,7 +8,6 @@ function DataManager() {
 
 DataManager.prototype = {
   readFile: function (callback) {
-    var err;
     jsonfile.readFile(dataPath, function (err, obj) {
       this.object = obj;
       callback(this.object);
