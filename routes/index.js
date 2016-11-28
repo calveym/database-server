@@ -9,6 +9,7 @@ var dataPath = path.join(__dirname, '../models/data.json');
 /* GET home page. */
 router.get('/get', function(req, res) {
   jsonfile.readFile(dataPath, function (err, obj) {
+    if (err) console.log(err);
     var key = Object.keys(req.query).toString();
     res.send(obj[req.query[key]]);
   });
@@ -19,9 +20,8 @@ router.post('/set', function(req, res) {
     var key = Object.keys(req.query).toString();
     obj[key] = req.query[key];
     jsonfile.writeFile(dataPath, obj, function (err) {
-      console.log(err);
+      if (err) console.log(err);
     });
-    console.log(obj);
     res.redirect('/get?key=' + Object.keys(obj)[Object.keys(obj).length - 1]);
   });
 });
