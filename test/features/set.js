@@ -11,11 +11,11 @@ describe('get animal', function() {
   });
 
   before(function(done) {
-    this.browser.visit('/get?key=animal', done);
+    this.browser.visit('/set?lang=js', done);
   });
 
-  it('should return Lion', function () {
+  it('should return js', function () {
     this.browser.assert.success();
-    assert(this.browser.document.documentElement.innerHTML.match("Lion"));
+    assert(this.browser.document.documentElement.innerHTML.match("js"));
   });
 });
