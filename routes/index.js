@@ -17,6 +17,7 @@ router.get('/get', function(req, res) {
 
 router.post('/set', function(req, res) {
   jsonfile.readFile(dataPath, function (err, obj) {
+    console.log("Running");
     var key = Object.keys(req.query).toString();
     obj[key] = req.query[key];
     jsonfile.writeFile(dataPath, obj, function (err) {
