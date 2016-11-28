@@ -4,9 +4,11 @@
  * Module dependencies.
  */
 
+var jsonfile = require('jsonfile');
 var app = require('../app');
 var debug = require('debug')('database-server:server');
 var http = require('http');
+var object;
 
 /**
  * Get port from environment and store in Express.
@@ -22,12 +24,16 @@ app.set('port', port);
 var server = http.createServer(app);
 
 /**
- * Listen on provided port, on all network interfaces.
+ * Read JSON file and start server once complete.
  */
-(function(){
-  server.listen(port);
 
+(function(){
+  jsonfile.readFile(dataPath, function (err, obj) {
+    object = obj;
+    server.listen(port);
+  });
 }());
+
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -90,3 +96,5 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+module.exports = object;
