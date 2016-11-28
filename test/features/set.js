@@ -6,8 +6,8 @@ var Browser = require('zombie');
 
 describe('get animal', function() {
   before(function() {
-    this.server = http.createServer(app).listen(3000);
-    this.browser = new Browser({ site: 'http://localhost:3000' });
+    this.server = http.createServer(app).listen(4000);
+    this.browser = new Browser({ site: 'http://localhost:4000' });
   });
 
   before(function(done) {
