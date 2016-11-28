@@ -1,27 +1,29 @@
 var jsonfile = require('jsonfile');
 var express = require('express');
 var router = express.Router();
-var dataManager = require('../models/dataManager');
-
+var DataManager = require('../models/dataManager');
+var dm = new DataManager();
 
 
 router.get('/get', function(req, res) {
-  jsonfile.readFile(dataPath, function (err, obj) {
-    if (err) console.log(err);
-    res.send(obj[req.query["key"]]);
+  dm.returnObject(function (obj) {
+    sendFileResponse(obj, req, res);
   });
 });
 
 router.post('/set', function(req, res) {
-  jsonfile.readFile(dataPath, function (err, obj) {
-    var key = Object.keys(req.query).toString();
-    obj[key] = req.query[key];
-    jsonfile.writeFile(dataPath, obj, function (err) {
-      if (err) console.log(err);
-    });
-    res.status(200);
-    res.send();
-  });
+  var obj = dm.returnObject();
+  dm.processFile(obj);
+  dm.sendOk(res);
 });
+
+function sendOk (res) {
+  res.status(200);
+  res.send();
+}
+
+function sendFileResponse (obj, req, res) {
+  res.send(obj[req.query.key]);
+}
 
 module.exports = router;
