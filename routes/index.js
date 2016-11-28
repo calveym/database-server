@@ -1,6 +1,9 @@
 var express = require('express');
+var jsonfile = require('jsonfile');
 var router = express.Router();
 var object = {fire: "man"};
+var model = require('../models/dataManager');
+
 
 /* GET home page. */
 router.get('/get', function(req, res) {
