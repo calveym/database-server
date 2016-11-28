@@ -1,18 +1,25 @@
+var jsonfile = require('jsonfile');
 var express = require('express');
 var router = express.Router();
-var object = {fire: "man"};
+var fs = require('fs');
 
-/* GET home page. */
+
 router.get('/get', function(req, res) {
+  var obj;
+
   var key = Object.keys(req.query).toString();
-  res.send(object[req.query[key]]);
+  res.send(obj[req.query[key]]);
 });
 
 router.post('/set', function(req, res) {
-  var key = Object.keys(req.query).toString();
-  object[key] = req.query[key];
-  console.log(object);
-  res.redirect('/get?key=' + Object.keys(object)[Object.keys(object).length - 1]);
+  fs.readFile("./data.json", function (obj) {
+    console.log(obj);
+    console.log("runs");
+    var key = Object.keys(req.query).toString();
+    obj[key] = req.query[key];
+    res.redirect('/get?key=' + Object.keys(obj)[Object.keys(obj).length - 1]);
+    model.exportObject(obj);
+  });
 });
 
 module.exports = router;
